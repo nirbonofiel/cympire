@@ -1,0 +1,126 @@
+.circle-border {
+  padding: 10px;
+
+  .circle-body {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    z-index: 1000;
+    .circle-content {
+      position: absolute;
+      top: 0;
+      left: 16px;
+      width: 80%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        color: #777;
+        transition: 0.5s;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    z-index: 1000;
+    circle {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 3px;
+      stroke-linecap: round;
+      transform: translate(2px, 2px);
+    }
+  }
+}
+
+.circle-body.not_started {
+  box-shadow: inset 0 0 70px rgb(2, 2, 2);
+}
+
+.circle-body.in_progress {
+  animation: body_in_progress 3s linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+.circle-body.done {
+  animation: body-done 4s linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+svg.in_progress {
+  circle:nth-child(2) {
+    animation: circle_in_progress 3s linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+  }
+}
+
+svg.done {
+  circle:nth-child(2) {
+    animation: circle-done 4s linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+  }
+}
+
+@keyframes circle_in_progress {
+  0% {
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+  }
+  100% {
+    stroke-dasharray: 440;
+    stroke-dashoffset: 180;
+    stroke: rgba(7, 160, 248, 0.774);
+  }
+}
+
+@keyframes circle-done {
+  0% {
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+  }
+  50% {
+    stroke-dasharray: 440;
+    stroke-dashoffset: 200;
+    stroke: rgba(7, 160, 248, 0.774);
+  }
+  100% {
+    stroke-dasharray: 462;
+    stroke-dashoffset: 0;
+    stroke: rgba(7, 248, 107, 0.774);
+  }
+}
+
+@keyframes body_in_progress {
+  0% {
+    box-shadow: inset 0 0 70px rgb(2, 2, 2);
+  }
+  100% {
+    box-shadow: inset 0 0 100px rgba(7, 160, 248, 0.774);
+  }
+}
+
+@keyframes body-done {
+  0% {
+    box-shadow: inset 0 0 70px rgb(2, 2, 2);
+  }
+  50% {
+    box-shadow: inset 0 0 70px rgba(7, 160, 248, 0.774);
+  }
+  100% {
+    box-shadow: inset 0 0 100px #33cc33;
+  }
+}
